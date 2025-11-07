@@ -5,7 +5,7 @@ version: '3.8'
 services:
   # Serviço da API
   api:
-    build: .
+    image: italocarlo0604/aula-devops-2025-2:{DOCKER_IMAGE_TAG}
     # Nome para o container
     container_name: api_nest
     # Mapear a porta 3000 do container para a porta 3000 do host
