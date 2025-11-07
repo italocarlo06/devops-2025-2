@@ -66,6 +66,24 @@ jobs:
           password: ${{secrets.PASSWORD}}
           source: "./docker-compose.yml"
           target: "~/"
+
+      - name: Deploy on Digital Ocean
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USER}}
+          password: ${{secrets.PASSWORD}}
+          script: |
+            # Extract the commit tag for Docker Image
+            TAG=${{ needs.build.outputs.docker_tag }}
+            # Create .env file
+            [-e .env] && rm .env
+            touch .env
+            echo "DOCKER_IMAGE_TAG=$TAG" >> .env
+            echo "DB_USER=${{secrets.DB_USER}}" >> .env
+            echo "DB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
+            echo "DB_NAME=${{secrets.DB_NAME}}" >> .env
+            echo "DB_PORT=${{secrets.DB_PORT}}" >> .env
           
 
         
