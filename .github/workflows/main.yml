@@ -85,7 +85,7 @@ jobs:
             echo "DB_NAME=${{secrets.DB_NAME}}" >> .env
             echo "DB_PORT=${{secrets.DB_PORT}}" >> .env
             # Login Docker
-            docker login -U ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
+            docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_TOKEN}}
             # Run MultiContainer
             docker compose up -d --build
           
